@@ -13,7 +13,7 @@ const router = express.Router();
 router
   .route('/')
   .get(auth, controller.list)
-  .post(validate(createUser), controller.create);
+  .post(auth, validate(createUser), controller.create);
 
   router.param('email', controller.load);
 
