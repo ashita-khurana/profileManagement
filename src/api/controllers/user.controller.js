@@ -66,6 +66,8 @@ exports.create = async (req, res, next) => {
 
  exports.update = async (req, res, next) => {
   try {
+    if(req.locals.user.role == "admin")
+        throw new APIError({ message: 'User cannot update admin details' });
     if(req.body.password)
       throw new APIError({ message: 'Password cannot be altered' });
     const updatedUser = omit(req.body, 'role');
